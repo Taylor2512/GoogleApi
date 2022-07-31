@@ -18,9 +18,6 @@ namespace GoogleApi.DBContext.Config
             builder.ToTable(Table.tbl_cordenada.ToString());
             builder.Property(e => e.latitud).IsUnicode(true);
             builder.Property(e => e.Longitud).IsUnicode(true);
-           /* builder.HasOne(e => e.Cordenadas_northeast).WithOne(e => e.Cordenadas).HasForeignKey<Cordenadas_northeast>(e => e.Id_Cordenadas);
-            builder.HasOne(e => e.Cordenadas_southwest).WithOne(e => e.Cordenadas).HasForeignKey<Cordenadas_southwest>(e => e.Id_Cordenadas);
-            builder.HasOne(e => e.Cordenadas_location).WithOne(e => e.Cordenadas).HasForeignKey<Cordenadas_location>(e => e.Id_Cordenadas);*/
         }
 
         public void Configure(EntityTypeBuilder<bounds> builder)
@@ -55,27 +52,33 @@ namespace GoogleApi.DBContext.Config
             builder.ToTable(Table.tbl_google_adress.ToString());
             builder.HasOne(e => e.plus_code).WithOne(e => e.GoogleAdress).HasForeignKey<GoogleAdress>(e => e.Id_plus_code).OnDelete(DeleteBehavior.Restrict);
             builder.HasOne(e => e.geometry).WithOne(e => e.GoogleAdress).HasForeignKey<GoogleAdress>(e => e.Id_geometry).OnDelete(DeleteBehavior.Restrict);
+      
         }
 
         public void Configure(EntityTypeBuilder<address_components_and_GoogleAdressType> builder)
         {
-            builder.ToTable(Table.tbl_google_adress_tiene_types.ToString());
+            builder.ToTable(Table.tbl_address_components_and_GoogleAdressType.ToString());
+            builder.HasKey(e => new { e.Id_GoogleAdress_types, e.Id_address_components });
+            builder.HasOne(e => e.GoogleAdress_types).WithMany(e => e.address_components_and_GoogleAdressType).HasForeignKey(e => e.Id_GoogleAdress_types);
+            builder.HasOne(e => e.address_components).WithMany(e => e.types).HasForeignKey(e => e.Id_address_components);
+
+
         }
-        /*
-public void Configure(EntityTypeBuilder<Cordenadas_location> builder)
-{
-builder.ToTable(Table.tbl_location.ToString());
-}
 
-public void Configure(EntityTypeBuilder<Cordenadas_southwest> builder)
-{
-builder.ToTable(Table.tbl_southwest.ToString());
-}
+        public void Configure(EntityTypeBuilder<GobalAdress> builder)
+        {
+            builder.ToTable(Table.tbl_GobalAdress.ToString());
+            builder.HasOne(e => e.plus_Code).WithOne(e => e.GobalAdress).HasForeignKey<GobalAdress>(e => e.Id_plus_code);
+            builder.HasMany(e => e.GoogleAdress).WithOne(e => e.GobalAdress).HasForeignKey(e => e.Id_GobalAdress);
+        }
 
-public void Configure(EntityTypeBuilder<Cordenadas_northeast> builder)
-{
-builder.ToTable(Table.tbl_northeast.ToString());
-}
-*/
+        public void Configure(EntityTypeBuilder<GoogleAdress_and_address_components> builder)
+        {
+            builder.ToTable(Table.tbl_GoogleAdress_and_address_components.ToString());
+            builder.HasKey(e => new { e.Id_GoogleAdress, e.Id_address_components });
+            builder.HasOne(e => e.address_Components).WithMany(e => e.GoogleAdress_and_address_components).HasForeignKey(e => e.Id_address_components);
+            builder.HasOne(e => e.GoogleAdress).WithMany(e => e.GoogleAdress_and_address_components).HasForeignKey(e => e.Id_GoogleAdress);
+
+        }
     }
 }

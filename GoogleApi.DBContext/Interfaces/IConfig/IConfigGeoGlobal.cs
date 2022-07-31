@@ -14,10 +14,10 @@ namespace GoogleApi.DBContext.Interfaces.IConfig
         IEntityTypeConfiguration<GoogleAdress>,
         IEntityTypeConfiguration<address_components_and_GoogleAdressType>,
         IEntityTypeConfiguration<GoogleAdress_tiene_types>,
+        IEntityTypeConfiguration<GobalAdress>,
+        IEntityTypeConfiguration<GoogleAdress_and_address_components>,
         IEntityTypeConfiguration<bounds>
-       /* IEntityTypeConfiguration<Cordenadas_location>,
-        IEntityTypeConfiguration<Cordenadas_southwest>,
-        IEntityTypeConfiguration<Cordenadas_northeast>*/
+
     {
     }
 }

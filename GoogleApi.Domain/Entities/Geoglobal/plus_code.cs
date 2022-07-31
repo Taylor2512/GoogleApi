@@ -13,6 +13,7 @@
         public string compound_code { get; set; }
         public string global_code { get; set; }
         public GoogleAdress GoogleAdress { get; set; }
+        public GobalAdress GobalAdress { get; set; }
     
     }
 }
