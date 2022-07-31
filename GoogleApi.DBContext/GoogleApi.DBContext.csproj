@@ -10,10 +10,4 @@
     <ProjectReference Include="..\GoogleApi.Domain\GoogleApi.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Context\" />
-    <Folder Include="Config\" />
-    <Folder Include="Interfaces\" />
-  </ItemGroup>
-
 </Project>
