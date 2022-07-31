@@ -1,4 +1,6 @@
 ﻿using GoogleApi.Extensions;
+using GoogleApi.pplication.Config;
+using GoogleApi.Repository.Config;
 using Microsoft.AspNetCore.HttpOverrides;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
@@ -12,6 +14,7 @@ namespace GoogleApi.Config
         {
 
             var builder = WebApplication.CreateBuilder(args);
+
 
             builder.ConfigureServices();
 
@@ -32,6 +35,8 @@ namespace GoogleApi.Config
           
 
             builder.Services.ConfigContext(builder.Configuration);
+            builder.Services.InyectarRepositorios();
+            builder.Services.InyectarAppsServices();
             builder.Services.AddControllers()
               .AddNewtonsoftJson(options =>
               {

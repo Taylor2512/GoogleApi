@@ -11,9 +11,4 @@
     <ProjectReference Include="..\GoogleApi.Repository\GoogleApi.Repository.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Dtos\" />
-    <Folder Include="Inferfaces\" />
-  </ItemGroup>
-
 </Project>
