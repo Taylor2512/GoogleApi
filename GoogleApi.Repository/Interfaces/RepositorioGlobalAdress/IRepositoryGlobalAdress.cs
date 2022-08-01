@@ -11,4 +11,15 @@ namespace GoogleApi.Repository.Interfaces
     public interface IRepositoryGlobalAdress: IControlRepositoryGlobalAdress<GobalAdress,Guid,string>
     {
     }
+    public interface IRepositoriobounds : IControlRepositoriobounds<bounds, Guid, string>
+    {
+
+    }
+    public interface IRepositoriolocation_type : IControlRepositoriolocation_type<location_type, int, string>
+    {
+
+    }
+    public interface IRepositorioCordenadas : IControlRepositorioCordenadas<Cordenadas,Guid,string>
+    {
+    }
 }

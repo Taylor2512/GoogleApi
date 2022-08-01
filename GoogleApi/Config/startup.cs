@@ -32,11 +32,7 @@ namespace GoogleApi.Config
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-          
-
-            builder.Services.ConfigContext(builder.Configuration);
-            builder.Services.InyectarRepositorios();
-            builder.Services.InyectarAppsServices();
+            builder.InyectarDependencias();
             builder.Services.AddControllers()
               .AddNewtonsoftJson(options =>
               {

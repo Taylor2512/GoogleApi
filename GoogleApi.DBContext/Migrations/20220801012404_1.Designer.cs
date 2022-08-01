@@ -3,7 +3,6 @@ using System;
 using GoogleApi.DBContext.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
@@ -12,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GoogleApi.DBContext.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220731155312_1")]
+    [Migration("20220801012404_1")]
     partial class _1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -20,27 +19,25 @@ namespace GoogleApi.DBContext.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "6.0.7")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128);
-
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+                .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             modelBuilder.Entity("GoogleApi.Domain.Entities.Geoglobal.address_components", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("long_name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("short_name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.HasKey("Id");
 
-                    b.ToTable("address_components");
+                    b.ToTable("address_Components");
                 });
 
             modelBuilder.Entity("GoogleApi.Domain.Entities.Geoglobal.address_components_and_GoogleAdressType", b =>
@@ -49,7 +46,7 @@ namespace GoogleApi.DBContext.Migrations
                         .HasColumnType("int");
 
                     b.Property<Guid>("Id_address_components")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("char(36)");
 
                     b.HasKey("Id_GoogleAdress_types", "Id_address_components");
 
@@ -62,13 +59,13 @@ namespace GoogleApi.DBContext.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("char(36)");
 
                     b.Property<Guid>("Id_northeast")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("char(36)");
 
                     b.Property<Guid>("Id_southwest")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("char(36)");
 
                     b.HasKey("Id");
 
@@ -85,15 +82,15 @@ namespace GoogleApi.DBContext.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("char(36)");
 
                     b.Property<double>("Longitud")
                         .IsUnicode(true)
-                        .HasColumnType("float");
+                        .HasColumnType("double");
 
                     b.Property<double>("latitud")
                         .IsUnicode(true)
-                        .HasColumnType("float");
+                        .HasColumnType("double");
 
                     b.HasKey("Id");
 
@@ -104,19 +101,19 @@ namespace GoogleApi.DBContext.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("char(36)");
 
                     b.Property<Guid>("Id_bounds")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("char(36)");
 
                     b.Property<Guid>("Id_location")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("char(36)");
 
                     b.Property<int>("Id_location_type")
                         .HasColumnType("int");
 
                     b.Property<Guid>("Id_viewport")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("char(36)");
 
                     b.HasKey("Id");
 
@@ -138,10 +135,10 @@ namespace GoogleApi.DBContext.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("char(36)");
 
                     b.Property<Guid>("Id_plus_code")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("char(36)");
 
                     b.HasKey("Id");
 
@@ -151,32 +148,45 @@ namespace GoogleApi.DBContext.Migrations
                     b.ToTable("tbl_GobalAdress", (string)null);
                 });
 
+            modelBuilder.Entity("GoogleApi.Domain.Entities.Geoglobal.GobalAdress_and_GoogleAdress", b =>
+                {
+                    b.Property<Guid>("Id_GoogleAdress")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid>("Id_GobalAdress")
+                        .HasColumnType("char(36)");
+
+                    b.HasKey("Id_GoogleAdress", "Id_GobalAdress");
+
+                    b.HasIndex("Id_GobalAdress");
+
+                    b.ToTable("tbl_GobalAdress_and_GoogleAdress", (string)null);
+                });
+
             modelBuilder.Entity("GoogleApi.Domain.Entities.Geoglobal.GoogleAdress", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("char(36)");
 
                     b.Property<Guid>("Id_GobalAdress")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("char(36)");
 
                     b.Property<Guid>("Id_geometry")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("char(36)");
 
                     b.Property<Guid>("Id_plus_code")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("formatted_address")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("place_id")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("Id_GobalAdress");
 
                     b.HasIndex("Id_geometry")
                         .IsUnique();
@@ -190,10 +200,10 @@ namespace GoogleApi.DBContext.Migrations
             modelBuilder.Entity("GoogleApi.Domain.Entities.Geoglobal.GoogleAdress_and_address_components", b =>
                 {
                     b.Property<Guid>("Id_GoogleAdress")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("char(36)");
 
                     b.Property<Guid>("Id_address_components")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("char(36)");
 
                     b.HasKey("Id_GoogleAdress", "Id_address_components");
 
@@ -205,7 +215,7 @@ namespace GoogleApi.DBContext.Migrations
             modelBuilder.Entity("GoogleApi.Domain.Entities.Geoglobal.GoogleAdress_tiene_types", b =>
                 {
                     b.Property<Guid>("Id_GoogleAdress")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("char(36)");
 
                     b.Property<int>("Id_GoogleAdress_types")
                         .HasColumnType("int");
@@ -223,11 +233,9 @@ namespace GoogleApi.DBContext.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id_GoogleAdress_types"), 1L, 1);
-
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.HasKey("Id_GoogleAdress_types");
 
@@ -240,11 +248,9 @@ namespace GoogleApi.DBContext.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id_location_type"), 1L, 1);
-
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.HasKey("Id_location_type");
 
@@ -255,15 +261,15 @@ namespace GoogleApi.DBContext.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("compound_code")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("global_code")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.HasKey("Id");
 
@@ -279,7 +285,7 @@ namespace GoogleApi.DBContext.Migrations
                         .IsRequired();
 
                     b.HasOne("GoogleApi.Domain.Entities.Geoglobal.address_components", "address_components")
-                        .WithMany("types")
+                        .WithMany("address_components_and_GoogleAdressType")
                         .HasForeignKey("Id_address_components")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -324,7 +330,7 @@ namespace GoogleApi.DBContext.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("GoogleApi.Domain.Entities.Geoglobal.location_type", "location_Type")
+                    b.HasOne("GoogleApi.Domain.Entities.Geoglobal.location_type", "location_Types")
                         .WithMany("geometry")
                         .HasForeignKey("Id_location_type")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -340,7 +346,7 @@ namespace GoogleApi.DBContext.Migrations
 
                     b.Navigation("location");
 
-                    b.Navigation("location_Type");
+                    b.Navigation("location_Types");
 
                     b.Navigation("viewport");
                 });
@@ -356,14 +362,27 @@ namespace GoogleApi.DBContext.Migrations
                     b.Navigation("plus_Code");
                 });
 
-            modelBuilder.Entity("GoogleApi.Domain.Entities.Geoglobal.GoogleAdress", b =>
+            modelBuilder.Entity("GoogleApi.Domain.Entities.Geoglobal.GobalAdress_and_GoogleAdress", b =>
                 {
                     b.HasOne("GoogleApi.Domain.Entities.Geoglobal.GobalAdress", "GobalAdress")
-                        .WithMany("GoogleAdress")
+                        .WithMany("GobalAdress_and_GoogleAdress")
                         .HasForeignKey("Id_GobalAdress")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("GoogleApi.Domain.Entities.Geoglobal.GoogleAdress", "GoogleAdress")
+                        .WithMany("GobalAdress_and_GoogleAdress")
+                        .HasForeignKey("Id_GoogleAdress")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("GobalAdress");
+
+                    b.Navigation("GoogleAdress");
+                });
+
+            modelBuilder.Entity("GoogleApi.Domain.Entities.Geoglobal.GoogleAdress", b =>
+                {
                     b.HasOne("GoogleApi.Domain.Entities.Geoglobal.geometry", "geometry")
                         .WithOne("GoogleAdress")
                         .HasForeignKey("GoogleApi.Domain.Entities.Geoglobal.GoogleAdress", "Id_geometry")
@@ -375,8 +394,6 @@ namespace GoogleApi.DBContext.Migrations
                         .HasForeignKey("GoogleApi.Domain.Entities.Geoglobal.GoogleAdress", "Id_plus_code")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
-
-                    b.Navigation("GobalAdress");
 
                     b.Navigation("geometry");
 
@@ -425,7 +442,7 @@ namespace GoogleApi.DBContext.Migrations
                 {
                     b.Navigation("GoogleAdress_and_address_components");
 
-                    b.Navigation("types");
+                    b.Navigation("address_components_and_GoogleAdressType");
                 });
 
             modelBuilder.Entity("GoogleApi.Domain.Entities.Geoglobal.bounds", b =>
@@ -457,11 +474,13 @@ namespace GoogleApi.DBContext.Migrations
 
             modelBuilder.Entity("GoogleApi.Domain.Entities.Geoglobal.GobalAdress", b =>
                 {
-                    b.Navigation("GoogleAdress");
+                    b.Navigation("GobalAdress_and_GoogleAdress");
                 });
 
             modelBuilder.Entity("GoogleApi.Domain.Entities.Geoglobal.GoogleAdress", b =>
                 {
+                    b.Navigation("GobalAdress_and_GoogleAdress");
+
                     b.Navigation("GoogleAdress_and_address_components");
 
                     b.Navigation("types");

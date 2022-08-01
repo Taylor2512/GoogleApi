@@ -16,7 +16,7 @@
 
         public List<GoogleAdress_and_address_components> GoogleAdress_and_address_components { set; get; }
 
-        public List<address_components_and_GoogleAdressType> types { set; get; }
+        public List<address_components_and_GoogleAdressType> address_components_and_GoogleAdressType { set; get; }
 
     }
 }

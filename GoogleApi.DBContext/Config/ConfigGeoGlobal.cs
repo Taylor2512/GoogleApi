@@ -35,7 +35,7 @@ namespace GoogleApi.DBContext.Config
             builder.ToTable(Table.tbl_geometry.ToString());
             builder.HasOne(e => e.bounds).WithOne(e => e.geometry).HasForeignKey<geometry>(e => e.Id_bounds).OnDelete(DeleteBehavior.Restrict);
             builder.HasOne(e => e.location).WithOne(e => e.geometry).HasForeignKey<geometry>(e => e.Id_location).OnDelete(DeleteBehavior.Restrict);
-            builder.HasOne(e => e.location_Type).WithMany(e => e.geometry).HasForeignKey(e => e.Id_location_type).OnDelete(DeleteBehavior.Restrict);
+            builder.HasOne(e => e.location_Types).WithMany(e => e.geometry).HasForeignKey(e => e.Id_location_type).OnDelete(DeleteBehavior.Restrict);
             builder.HasOne(e => e.viewport).WithOne(e => e.viewport).HasForeignKey<geometry>(e => e.Id_viewport).OnDelete(DeleteBehavior.Restrict);
         }
 
@@ -60,7 +60,7 @@ namespace GoogleApi.DBContext.Config
             builder.ToTable(Table.tbl_address_components_and_GoogleAdressType.ToString());
             builder.HasKey(e => new { e.Id_GoogleAdress_types, e.Id_address_components });
             builder.HasOne(e => e.GoogleAdress_types).WithMany(e => e.address_components_and_GoogleAdressType).HasForeignKey(e => e.Id_GoogleAdress_types);
-            builder.HasOne(e => e.address_components).WithMany(e => e.types).HasForeignKey(e => e.Id_address_components);
+            builder.HasOne(e => e.address_components).WithMany(e => e.address_components_and_GoogleAdressType).HasForeignKey(e => e.Id_address_components);
 
 
         }
@@ -69,7 +69,7 @@ namespace GoogleApi.DBContext.Config
         {
             builder.ToTable(Table.tbl_GobalAdress.ToString());
             builder.HasOne(e => e.plus_Code).WithOne(e => e.GobalAdress).HasForeignKey<GobalAdress>(e => e.Id_plus_code);
-            builder.HasMany(e => e.GoogleAdress).WithOne(e => e.GobalAdress).HasForeignKey(e => e.Id_GobalAdress);
+
         }
 
         public void Configure(EntityTypeBuilder<GoogleAdress_and_address_components> builder)
@@ -78,6 +78,16 @@ namespace GoogleApi.DBContext.Config
             builder.HasKey(e => new { e.Id_GoogleAdress, e.Id_address_components });
             builder.HasOne(e => e.address_Components).WithMany(e => e.GoogleAdress_and_address_components).HasForeignKey(e => e.Id_address_components);
             builder.HasOne(e => e.GoogleAdress).WithMany(e => e.GoogleAdress_and_address_components).HasForeignKey(e => e.Id_GoogleAdress);
+
+        }
+
+        public void Configure(EntityTypeBuilder<GobalAdress_and_GoogleAdress> builder)
+        {
+            builder.ToTable(Table.tbl_GobalAdress_and_GoogleAdress.ToString());
+            builder.HasKey(e => new { e.Id_GoogleAdress, e.Id_GobalAdress });
+            builder.HasOne(e => e.GobalAdress).WithMany(e => e.GobalAdress_and_GoogleAdress).HasForeignKey(e => e.Id_GobalAdress);
+            builder.HasOne(e => e.GoogleAdress).WithMany(e => e.GobalAdress_and_GoogleAdress).HasForeignKey(e => e.Id_GoogleAdress);
+
 
         }
     }

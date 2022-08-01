@@ -10,7 +10,7 @@ namespace GoogleApi.Extensions
     {
         public static void ConfigContext(this IServiceCollection services, IConfiguration configuration)
         {
-            /* var Administracion = configuration.GetConnectionString("Administracion");
+             var Administracion = configuration.GetConnectionString("Defaultdatabase");
 
              services.AddDbContext<ApplicationDbContext>(options =>
              {
@@ -24,7 +24,7 @@ namespace GoogleApi.Extensions
                                 sqlOptions.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName);
                             }
 
-                        )
+                        );
                      //.ReplaceService<IUpdateSqlGenerator, MapToProcedureUpdateSqlGenerator>();
 
                  options.EnableSensitiveDataLogging();
@@ -32,13 +32,13 @@ namespace GoogleApi.Extensions
                  options.EnableThreadSafetyChecks();
                  options.EnableDetailedErrors();
 
-             }, ServiceLifetime.Transient);*/
+             }, ServiceLifetime.Transient);
 
 
-            services.AddDbContext<ApplicationDbContext>(options =>
+           /* services.AddDbContext<ApplicationDbContext>(options =>
             {
                 options.UseSqlServer(configuration.GetConnectionString("Defaultdatabase"));
-            });
+            });*/
         }
         public static void AddSwagger(this IServiceCollection services)
         {

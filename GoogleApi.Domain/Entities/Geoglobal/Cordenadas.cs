@@ -8,6 +8,10 @@ namespace GoogleApi.Domain.Entities.Geoglobal
 {
     public class Cordenadas:Entity<Guid>
     {
+        public Cordenadas()
+        {
+        }
+
         public Cordenadas(Guid id) : base(id)
         {
         }

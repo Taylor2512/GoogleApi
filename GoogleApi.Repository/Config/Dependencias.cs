@@ -14,6 +14,10 @@ namespace GoogleApi.Repository.Config
         public static void InyectarRepositorios(this IServiceCollection services)
         {
             services.AddScoped<IRepositoryGlobalAdress,RepositoryGlobalAdress>();
+            services.AddScoped< IRepositoriobounds ,Repositoriobounds> ();
+            services.AddScoped<IExtensionRepository,ExtensionRepository>();
+            services.AddScoped<IRepositorioCordenadas , RepositorioCordenadas> ();
+            //services.AddScoped<IExtensionRepository>();
 
         }
     }

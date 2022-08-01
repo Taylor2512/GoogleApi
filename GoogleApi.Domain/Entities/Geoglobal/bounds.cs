@@ -8,12 +8,7 @@ namespace GoogleApi.Domain.Entities.Geoglobal
 {
     public class bounds:Entity<Guid>
     {
-        public bounds(Guid id) : base(id)
-        {
-        }
-
-  
-
+    
         public Guid Id_northeast { get; set; }
         public Guid Id_southwest { get; set; }
   /*      public Cordenadas_northeast northeast { get; set; }

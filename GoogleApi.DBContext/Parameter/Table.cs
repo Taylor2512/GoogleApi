@@ -20,5 +20,7 @@ namespace GoogleApi.DBContext.Parameter
         tbl_GobalAdress,
         tbl_google_adress_types,
         tbl_GoogleAdress_and_address_components,
+        tbl_GobalAdress_and_GoogleAdress,
+        tbl_location_type_and_geometry,
     }
 }

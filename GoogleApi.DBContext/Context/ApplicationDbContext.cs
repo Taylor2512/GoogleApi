@@ -30,13 +30,17 @@ namespace GoogleApi.DBContext.Context
         {
             try
             {
-                Update(t);
+                var result = t;
+                Add(result);
+
                 await SaveChangesAsync();
+                t = result;
                 return t;
             }
             catch (Exception ex)
             {
-
+                Tools.messageError = ex.InnerException.Message ?? null;
+                Tools.messageError = Tools.messageError ?? Tools.messageError + ex.Message;
                 return default;
             }
         }   
@@ -50,7 +54,8 @@ namespace GoogleApi.DBContext.Context
             }
             catch (Exception ex)
             {
-                Tools.messageError = ex.Message??string.Empty + ex.InnerException.Message??string.Empty;
+                Tools.messageError = ex.Message ?? string.Empty;
+                Tools.messageError = Tools.messageError ?? ex.InnerException.Message ?? string.Empty;
                 return default;
             }
         }
@@ -63,7 +68,8 @@ namespace GoogleApi.DBContext.Context
                 return t;
             }catch(Exception ex)
             {
-                Tools.messageError = ex.Message ?? string.Empty + ex.InnerException.Message ?? string.Empty;
+                Tools.messageError = ex.InnerException.Message ?? null;
+                Tools.messageError = Tools.messageError ?? Tools.messageError+ ex.Message;
                 return default;
             }
 

@@ -8,55 +8,55 @@ namespace GoogleApi.pplication.Dtos.GoogleEncoding
 {
     public class GoogleEncodingDto
     {
-        public plus_code plus_code { set; get; }
-        public List<GoogleAdress> results { set; get; }
+        public plus_codeDto plus_code { set; get; }
+        public List<GoogleAdressDto> results { set; get; }
         public string status { set; get; }
     }
-    public class plus_code
+    public class plus_codeDto
     {
         public string compound_code { get; set; }
         public string global_code { get; set; }
     }
-    public class GoogleAdress
+    public class GoogleAdressDto
     {
-        public List<Google_address_components> address_Components { set; get; }
+        public List<Google_address_componentsDto> address_Components { set; get; }
         public string formatted_address { get; set; }
-        public Google_geometry geometry { set; get; }
+        public Google_geometryDto geometry { set; get; }
         public string place_id { get; set; }
-        public plus_code plus_code { set; get; }
+        public plus_codeDto plus_code { set; get; }
         public List<string> types { get; set; }
 
     }
-    public class Google_address_components
+    public class Google_address_componentsDto
     {
         public string long_name { get; set; }
         public string short_name { get; set; }
         public List<string> types { get; set; }
     }
-    public class Google_geometry
+    public class Google_geometryDto
     {
-        public Google_bounds bounds { set; get; }
-        public Google_cordenadas location { set; get; }
+        public Google_boundsDto bounds { set; get; }
+        public Google_cordenadasDto location { set; get; }
         public string location_type { set; get; }
 
-        public Google_viewport viewport { set; get; }
+        public Google_boundsDto viewport { set; get; }
     }
-    public class Google_cordenadas
+    public class Google_cordenadasDto
     {
         public double lat { set; get; }
         public double lng { set; get; }
     }
 
-    public class Google_bounds
+    public class Google_boundsDto
     {
-        public Google_cordenadas northeast { set; get; }
-        public Google_cordenadas southwest { set; get; }
+        public Google_cordenadasDto northeast { set; get; }
+        public Google_cordenadasDto southwest { set; get; }
     }
 
 
-    public class Google_viewport
+/*    public class Google_viewport
     {
-        public Google_cordenadas northeast { set; get; }
-        public Google_cordenadas southwest { set; get; }
-    }
+        public Google_cordenadasDto northeast { set; get; }
+        public Google_cordenadasDto southwest { set; get; }
+    }*/
 }

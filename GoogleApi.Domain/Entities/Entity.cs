@@ -104,7 +104,7 @@ namespace GoogleApi.Domain.Entities
         }
 
         /// <summary>
-        /// Serves as a hash function for this type.
+        /// Serves as a hash function for this address_components_and_GoogleAdressType.
         /// </summary>
         /// <returns>A hash code for the current Key 
         /// property.</returns>

@@ -36,7 +36,7 @@ namespace GoogleApi.Repository.Repository.GoogleRepository
 
         public async Task<GobalAdress> Put(GobalAdress entidad)
         {
-            return await _context.Insertar(entidad);
+            return await _context.Actualizar(entidad);
         }
     }
 }
