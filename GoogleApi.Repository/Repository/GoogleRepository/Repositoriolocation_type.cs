@@ -38,8 +38,8 @@ namespace GoogleApi.Repository.Repository.GoogleRepository
             var encontrado = await Get(entidad.Name);
             if (encontrado== null)
             {
-                _context.Add(entidad);
-                await _context.SaveChangesAsync();
+                await _context.Insertar(entidad);
+                //await _context.SaveChangesAsync();
                 return entidad;
             }
             return entidad = encontrado;
